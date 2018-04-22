@@ -53,6 +53,8 @@ Easily setup SAPCC in docker.
 
     You will be asked to change your password.
 
+    **Hint:** It might take a few seconds after you can access [https://localhost:8443](https://localhost:8443). This is because the SAP Cloud Connector needs some time to start (even though the Docker Container has immediately started).
+
 ## Docker Configuration and Commands
 
 ### Creating a Network called `saptrial`
