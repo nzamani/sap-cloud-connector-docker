@@ -8,22 +8,22 @@ Easily setup SAPCC in docker.
 
 1. Install [Git](https://git-scm.com)
 
-On Windows I suggest to install Git Bash as well (you'll be asked during the installation process).
+    On Windows I suggest to install Git Bash as well (you'll be asked during the installation process).
 
-**Hint:** Installing git is actually not really needed. Alternatively, you could also copy/download this Dockerfile to yor machine.
+    **Hint:** Installing git is actually not really needed. Alternatively, you could also copy/download this Dockerfile to yor machine.
 
 1. Clone this repo
 
-```sh
-git clone https://github.com/nzamani/sap-cloud-connector-docker.git
-cd sap-cloud-connector-docker
-```
+    ```sh
+    git clone https://github.com/nzamani/sap-cloud-connector-docker.git
+    cd sap-cloud-connector-docker
+    ```
 
 1. Build the Docker image
 
-```sh
-docker build -t sapcc:2.11.0.3 .
-```
+    ```sh
+    docker build -t sapcc:2.11.0.3 .
+    ```
 
 1. Create a container running as a deamon
 
@@ -52,7 +52,6 @@ docker build -t sapcc:2.11.0.3 .
       - **Password:** manage
 
     You will be asked to change your password.
-
 
 ## Docker Configuration and Commands
 
