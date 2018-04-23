@@ -6,6 +6,8 @@ Easily setup SAPCC in docker.
 
 1. Install [Docker](https://www.docker.com/community-edition)
 
+**Windows:** Make sure you are running on Windows 10! For installing Docker you will need admin rights on your machine. Furthermore, you might have to run your Terminal/CLI as "Administrator" in case your current user is not an admin user (i.e. GitBash, PowerShell).
+
 1. Install [Git](https://git-scm.com)
 
     On Windows I suggest to install Git Bash as well (you'll be asked during the installation process).
@@ -21,9 +23,20 @@ Easily setup SAPCC in docker.
 
 1. Build the Docker image
 
-    ```sh
-    docker build -t sapcc:2.11.0.3 .
-    ```
+    - Without Proxy
+
+        ```sh
+        docker build -t sapcc:2.11.0.3 .
+        ```
+
+    - Behind a Proxy
+
+        ```sh
+        docker build --build-arg http_proxy=http://proxy.mycompany.corp:1234 --build-arg https_proxy=http://proxy.mycompany.corp:1234 -t sapcc:2.11.0.3 .
+        ```
+
+        **Hint:** In a proxy environment your `docker build` command (see above) will fail in case you don't set the proxy as mentioned above or in case you use wrong proxy settings. Keep in mind that you might have to set the proxy manually for some software installed in the container, i.e. for the SAPCC you can set it manually for each SAPCP connection.
+
 
 1. Create a container running as a deamon
 
@@ -54,6 +67,10 @@ Easily setup SAPCC in docker.
     You will be asked to change your password.
 
     **Hint:** It might take a few seconds after you can access [https://localhost:8443](https://localhost:8443). This is because the SAP Cloud Connector needs some time to start (even though the Docker Container has immediately started).
+
+1. Proxy Settings
+
+    A proxy can be set manually for each SAPCP connection after [logging on](https://localhost:8443) to the SAPCC using a browser. Make sure to use the correct proxy settings (incl. credentials if required), otherwise your SAPCC might not be able to connect to your SAPCC account.
 
 ## Docker Configuration and Commands
 
