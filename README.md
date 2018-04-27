@@ -2,6 +2,8 @@
 
 Easily setup SAPCC in docker.
 
+See my YouTube video for additional details: [Installing SAP Cloud Connector (SAPCC) into Docker and connecting it to SAP Cloud Platform (SAPCP)](https://www.youtube.com/watch?v=9uU1ny-0iNE)
+
 ## Instructions
 
 1. Install [Docker](https://www.docker.com/community-edition)
@@ -36,7 +38,6 @@ Easily setup SAPCC in docker.
         ```
 
         **Hint:** In a proxy environment your `docker build` command (see above) will fail in case you don't set the proxy as mentioned above or in case you use wrong proxy settings. Also consider that you might have to set the proxy manually for some software installed in the container, i.e. for the SAPCC you can set it manually for each SAPCP connection.
-
 
 1. Create a container running as a deamon
 
@@ -118,6 +119,48 @@ docker commit sapcc sapccbackup:1
 # Hint: if the ports etc are already used by other containers you must use different ports (or i.e. deleting the other containers first)
 docker run -p 8443:8443 -h mysapcc --name sapccNewContainer -d sapccbackup:1
 ```
+
+## SAP Cloud Platform Destinations
+
+In case you followed my YouTube Video [Installing SAP NW ABAP 7.51 SP02 into Docker](https://www.youtube.com/watch?v=H0GEg8r7P48) or followed the steps [described here](https://github.com/nzamani/sap-nw-abap-trial-docker) then the following SAPCP Destinations
+can be used:
+
+### Destinations for NW ABAP Trial OData Services (powered by SAP Gateway)
+
+#### OData with Basic Authentication
+
+| Field          | Value                                     |
+|:-------------- |:------------------------------------------|
+| Name           | NW_ABAP_751_Docker_BasicAuth              |
+| Type           | HTTP                                      |
+| Description    | NW ABAP 7.51 in Docker on localhost Basic |
+| Location ID    |                                           |
+| URL            | https://nwabap751:44300/sap/opu/odata     |
+| Proxy Type     | OnPremise                                 |
+| Authentication | BasicAuthentication                       |
+| User           | DEVELOPER                                 |
+| Password       | Appl1ance                                 |
+
+#### OData with Principal Propagation
+
+| Field          | Value                                   |
+|:-------------- |:----------------------------------------|
+| Name           | NW_ABAP_751_Docker_PrincipalPropagation |
+| Type           | HTTP                                    |
+| Description    | NW ABAP 7.51 in Docker on localhost PP  |
+| Location ID    |                                         |
+| URL            | https://nwabap751:44300/sap/opu/odata   |
+| Proxy Type     | OnPremise                               |
+| Authentication | PrincipalPropagation                    |
+
+#### Additional Properties for both BasicAuth and PrincipalPropagation
+
+| Property                         | Value                                                           |
+|:---------------------------------|:----------------------------------------------------------------|
+| WebIDEUsage                      | dev_abap,bsp_execute_abap,ui5_execute_abap,odata_abap,odata_gen |
+| WebIDESystem                     | NPL                                                             |
+| WebIDEEnabled                    | true                                                            |
+| HTML5.SocketReadTimeoutInSeconds | 300                                                             |
 
 ## Additional Resources
 
