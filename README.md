@@ -14,7 +14,7 @@ See my YouTube video for additional details: [Installing SAP Cloud Connector (SA
 
     On Windows I suggest to install Git Bash as well (you'll be asked during the installation process).
 
-    **Hint:** Installing git is actually not really needed. Alternatively, you could also copy/download this Dockerfile to yor machine.
+    **Hint:** Installing git is actually not really needed. Alternatively, you could also copy/download this Dockerfile to yor machine manually.
 
 1. Clone this repo
 
