@@ -7,10 +7,16 @@ Follow the steps mentioned here to generate self signed certificates with openOp
 1. Create a separate folder in which the generated files will be placed.
 
     ```sh
-    mkdir certs && cd certs
+    mkdir mycerts && cd mycerts
     ```
 
     **Hint:** The folder certs of this repository already exoists and contains the intermediate and a CA certificate. Feel free to use them, i.e. in case you don't want to follow the next steps.
+
+1. Create a file ca.conf in that folder with the content of [certs/ca.conf](https://github.com/nzamani/sap-cloud-connector-docker/blob/master/certs/ca.conf)
+
+    ```sh
+    wget https://raw.githubusercontent.com/nzamani/sap-cloud-connector-docker/master/certs/ca.conf
+    ```
 
 1. Execute the following commands:
 
