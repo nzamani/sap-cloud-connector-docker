@@ -18,6 +18,8 @@ Follow the steps mentioned here to generate self signed certificates with openOp
     wget https://raw.githubusercontent.com/nzamani/sap-cloud-connector-docker/master/certs/ca.conf
     ```
 
+    **Hint:** ca.conf was created by following step 2 on [Creating Intermediate Certificates](https://help.hana.ondemand.com/hana_cloud_platform_mobile_services_preview/frameset.htm?713d30fa7aa346f39896acd1229dc06f.html). However, the config on this site is buggy. The ca.conf as part of this repo is a fixed one.
+
 1. Execute the following commands:
 
     ```sh
@@ -37,12 +39,10 @@ Follow the steps mentioned here to generate self signed certificates with openOp
     openssl pkcs12 -export -clcerts -in SAPCC_CA.crt -inkey SAPCC_CA.key -out SAPCC_CA.p12
     #==> type the password "sapcc" three times (same as above)
 
-    # now intermediste cert:
+    # now intermediate cert:
     touch certindex
     echo 1000 > certserial
     echo 1000 > crlnumber
-    # Hint: ca.conf was created by following step 2 on https://help.hana.ondemand.com/hana_cloud_platform_mobile_services_preview/frameset.htm?713d30fa7aa346f39896acd1229dc06f.html
-    # However, the config on this site is buggy. The ca.conf as part of this repo is a fixed one.
 
     # Then use your cli and hit:
     openssl genrsa -out intermediate.key 1024
@@ -50,3 +50,5 @@ Follow the steps mentioned here to generate self signed certificates with openOp
     openssl ca -batch -config ca.conf -notext -in intermediate.csr -out intermediate.crt
     openssl pkcs12 -export -clcerts -in intermediate.crt -inkey intermediate.key -out intermediate.p12
     ```
+
+    **Hint:** You will ony need the files `intermediate.p12` (for SAPCC) and `SAPCC_CA.crt` (for SAP NW ABAP).
