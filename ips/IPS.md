@@ -81,18 +81,97 @@ See [SAPCP Identity Provisioning Service on SAP HELP](https://help.sap.com/viewe
 
 ## SAP Cloud Platform Configuration
 
-1. SAPCP Destinations
-    - NW ABAP
-    - SAPCP Trial
+1. OAuth Client Credentials in Target SAPCP account (i.e. Trial)
 
-1. SAPCP IPS
-    - enable + go to service
+    - Going to **Security** -> **OAuth** -> **Platform API** and press **Press API Client**
+    - In the dialog
+      - set a description (i.e. "Identity Provisioning Service")
+      - check **Authorization Management** (will add **Read Authorization** and **Manage Authorization** automatically)
+      - then press "save"
 
-    - Create Source System
+    **Important**: Make sure to save the generated OAuth Client Credentials (both Client ID and Client Secret)
+
+1. SAPCP Destinations (in SAPCP directly or in IPS Configuration - I prefer the latter)
+
+    - RFC Destination (NW ABAP)
+
+      | Field          | Value                                       |
+      |:-------------- |:------------------------------------------- |
+      | Name           | IPS_SOURCE_NPL_001_RFC                      |
+      | Type           | RFC                                         |
+      | Description    | IPS Read from NPL in Docker (NW ABAP Trial) |
+      | Location ID    |                                             |
+      | User           | ZSSAPCPIPS                                  |
+      | Password       | Appl1ance                                   |
+
+      **Properties**
+
+      | Property           | Value     |
+      |:-------------------|:----------|
+      | jco.client.ashost  | nwabap751 |
+      | jco.client.client  | 001       |
+      | jco.client.r3name  | NPL       |
+      | jco.client.sysnr   | 00        |
+
+    - HTTP Destination (SAPCP account, in our case to the trial account)
+
+      First create OAuth Client Credentials in SAPCP by going to **Security** -> **OAuth** -> **Platform API** and press **Press API Client**. In the dialog set a description and check **Authorization Management** (will add **Read Authorization** and **Manage Authorization** automatically) , then press "save". Make sure to save the generated OAuth Client Credentials (both Client ID and Client Secret).
+
+      Now [create the destination](https://help.sap.com/viewer/f48e822d6d484fa5ade7dda78b64d9f5/Cloud/en-US/dcdf72892190449384ba522fa95b4e8e.html) using the generated OAuth Client Credentials:
+
+      | Field          | Value                                                                     |
+      |:-------------- |:------------------------------------------------------------------------- |
+      | Name           | IPS_TARGET_MYTRIAL_SAPCP                                                  |
+      | Type           | HTTP                                                                      |
+      | Description    | IPS Target to My SAPCP Trial                                              |
+      | URL            | https://api.hanatrial.ondemand.com/authorization/v1/accounts/p123456trial |
+      | Proxy Type     | Internet                                                                  |
+      | Authentication | BasicAuthentication                                                       |
+      | User           | Client ID                                                                 |
+      | Password       | Client Secret                                                             |
+
+      **Properties**
+
+      | Property              | Value                                             |
+      |:----------------------|:--------------------------------------------------|
+      | OAuth2TokenServiceURL | https://hanatrial.ondemand.com/oauth2/apitoken/v1 |
+
+      Also make sure to check "Use default JDK truststore".
+
+1. SAPCP Identity Provision Service (IPS)
+
+    - Add Source System
+
+      - Details
+
+        | Field            | Value                          |
+        |:---------------- |:------------------------------ |
+        | Type             | SAP Applicaiton Server ABAP    |
+        | System Name      | NW-ABAP-751-NPL                |
+        | Destination Name | IPS_SOURCE_NPL_001_RFC         |
+        | Description      | NW ABAP 7.51 Trial in Docker   |
+
+      - Transformation
+        Use the content of [NW-ABAP-751-NPL-001.source.transformation.json](./NW-ABAP-751-NPL-001.source.transformation.json)
+
       - Properties
         - `abap.role.filter`: `^(YDEMO|ZDEMO).*`
         - `ips.trace.failed.entity.content`: `true`
 
-    - Create Target System
+    - Add Target System
 
-    - Start Sync
+      - Details
+        | Field            | Value                              |
+        |:---------------- |:---------------------------------- |
+        | Type             | SAP Cloud Platform Java/HTML5 Apps |
+        | System Name      | SAPCP-MyTrial                      |
+        | Destination Name | IPS_TARGET_MYTRIAL_SAPCP           |
+        | Description      | Trial SAPCP Account                |
+
+      - Transformation
+        Use the content of [SAPCP-MyTrial.target.transformation.json](./SAPCP-MyTrial.target.transformation.json)
+
+      - Properties
+        - `ips.trace.failed.entity.content`: `true`
+
+    - Run the `Read Job` from your Source System + check result in log etc.
