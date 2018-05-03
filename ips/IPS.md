@@ -83,7 +83,7 @@ See [SAPCP Identity Provisioning Service on SAP HELP](https://help.sap.com/viewe
 
 1. OAuth Client Credentials in Target SAPCP account (i.e. Trial)
 
-    - Going to **Security** -> **OAuth** -> **Platform API** and press **Press API Client**
+    - Go to **Security** -> **OAuth** -> **Platform API** and press **Press API Client**
     - In the dialog
       - set a description (i.e. "Identity Provisioning Service")
       - check **Authorization Management** (will add **Read Authorization** and **Manage Authorization** automatically)
@@ -161,6 +161,7 @@ See [SAPCP Identity Provisioning Service on SAP HELP](https://help.sap.com/viewe
     - Add Target System
 
       - Details
+
         | Field            | Value                              |
         |:---------------- |:---------------------------------- |
         | Type             | SAP Cloud Platform Java/HTML5 Apps |
