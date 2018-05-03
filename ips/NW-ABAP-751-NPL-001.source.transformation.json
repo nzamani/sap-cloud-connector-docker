@@ -1,0 +1,94 @@
+{
+    "user": {
+        "ignore": true,
+        "mappings": [
+            {
+                "sourcePath": "$.USERNAME",
+                "targetVariable": "entityIdSourceSystem"
+            },
+            {
+                "sourcePath": "$.USERNAME",
+                "targetPath": "$.userName"
+            },
+            {
+                "constant": "urn:ietf:params:scim:schemas:core:2.0:User",
+                "targetPath": "$.schemas[0]"
+            },
+            {
+                "sourcePath": "$.ADDRESS.E_MAIL",
+                "optional": true,
+                "targetPath": "$.emails[0].value"
+            },
+            {
+                "sourcePath": "$.ADDRESS.FIRSTNAME",
+                "optional": true,
+                "targetPath": "$.name.givenName"
+            },
+            {
+                "sourcePath": "$.ADDRESS.LASTNAME",
+                "optional": true,
+                "targetPath": "$.name.familyName"
+            },
+            {
+                "constant": false,
+                "targetPath": "$.active"
+            },
+            {
+                "condition": "($.ISLOCKED.LOCAL_LOCK != 'L') && ($.ISLOCKED.NO_USER_PW != 'L') && ($.ISLOCKED.GLOB_LOCK != 'L') && ($.ISLOCKED.WRNG_LOGON != 'L')",
+                "constant": true,
+                "targetPath": "$.active"
+            },
+            {
+                "sourcePath": "$.ACTIVITYGROUPS[*].AGR_NAME",
+                "preserveArrayWithSingleElement": true,
+                "optional": true,
+                "targetPath": "$.groups[?(@.value)]"
+            }
+        ]
+    },
+    "group": {
+        "mappings": [
+            {
+                "sourcePath": "$.ROLE_NAME",
+                "targetVariable": "entityIdSourceSystem"
+            },
+            {
+                "targetPath": "$.displayName",
+                "type": "valueMapping",
+                "sourcePaths": [
+                    "$.ROLE_NAME"
+                ],
+                "valueMappings": [
+                    {
+                        "key": [
+                            "ZNABI_MANAGER"
+                        ],
+                        "mappedValue": "MyManagerGroup"
+                    },
+                    {
+                        "key": [
+                            "ZNABI_PURCHASER"
+                        ],
+                        "mappedValue": "MyPurchaserGroup"
+                    },
+                    {
+                        "key": [
+                            "ZNABI_SALESREP"
+                        ],
+                        "mappedValue": "MySalesRepGroup"
+                    }
+                ]
+            },
+            {
+                "constant": "urn:ietf:params:scim:schemas:core:2.0:Group",
+                "targetPath": "$.schemas[0]"
+            },
+            {
+                "sourcePath": "$.USERLIST[*].USERNAME",
+                "preserveArrayWithSingleElement": true,
+                "optional": true,
+                "targetPath": "$.member"
+            }
+        ]
+    }
+}

@@ -1,0 +1,16 @@
+{
+    "group": {
+        "condition": "($.displayName EMPTY false)",
+        "mappings": [
+            {
+                "sourcePath": "$.displayName",
+                "targetVariable": "entityIdTargetSystem"
+            },
+            {
+                "sourcePath": "$.member",
+                "optional": true,
+                "targetPath": "$.users"
+            }
+        ]
+    }
+}

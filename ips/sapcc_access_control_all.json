@@ -1,0 +1,57 @@
+[{
+	"cloudHost": "nwabap751",
+	"cloudPort": "44300",
+	"localHost": "vhcalnplci",
+	"localPort": "44300",
+	"protocol": "HTTPS",
+	"backendType": "abapSys",
+	"authMode": "X509_CERTIFICATE",
+	"description": "",
+	"allowedClients": [],
+	"blacklistedUser": [],
+	"resources": [{
+		"path": "/",
+		"enabled": true,
+		"exactMatchOnly": false,
+		"description": ""
+	}]
+}, {
+	"cloudHost": "nwabap751",
+	"cloudPort": "sapgw00",
+	"localHost": "vhcalnplci",
+	"localPort": "sapgw00",
+	"protocol": "RFC",
+	"backendType": "abapSys",
+	"sncPartnerName": "",
+	"sapRouter": "",
+	"authMode": "NONE",
+	"description": "RFC for SAPCP Identity Provisioning Service",
+	"allowedClients": [],
+	"blacklistedUser": [],
+	"resources": [{
+		"path": "BAPI_USER",
+		"enabled": true,
+		"exactMatchOnly": false,
+		"description": ""
+	}, {
+		"path": "BAPI_USER_GETLIST",
+		"enabled": true,
+		"exactMatchOnly": false,
+		"description": ""
+	}, {
+		"path": "BAPI_USER_GET_DETAIL",
+		"enabled": true,
+		"exactMatchOnly": false,
+		"description": ""
+	}, {
+		"path": "PRGN_ROLE_GETLIST",
+		"enabled": true,
+		"exactMatchOnly": false,
+		"description": ""
+	}, {
+		"path": "PRNG",
+		"enabled": true,
+		"exactMatchOnly": false,
+		"description": ""
+	}]
+}]
