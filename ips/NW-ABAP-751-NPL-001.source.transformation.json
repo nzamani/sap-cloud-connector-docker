@@ -61,19 +61,19 @@
                 "valueMappings": [
                     {
                         "key": [
-                            "ZNABI_MANAGER"
+                            "ZDEMO_MANAGER"
                         ],
                         "mappedValue": "MyManagerGroup"
                     },
                     {
                         "key": [
-                            "ZNABI_PURCHASER"
+                            "ZDEMO_PURCHASER"
                         ],
                         "mappedValue": "MyPurchaserGroup"
                     },
                     {
                         "key": [
-                            "ZNABI_SALESREP"
+                            "ZDEMO_SALESREP"
                         ],
                         "mappedValue": "MySalesRepGroup"
                     }
