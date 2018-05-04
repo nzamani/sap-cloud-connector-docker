@@ -91,7 +91,7 @@ See [SAPCP Identity Provisioning Service on SAP HELP](https://help.sap.com/viewe
 
     **Important**: Make sure to save the generated OAuth Client Credentials (both Client ID and Client Secret)
 
-1. SAPCP Destinations (on SAPCP accouint level, for me it did not work as expected IPS level)
+1. SAPCP Destinations (on SAPCP account level, for me it did not work as expected IPS level)
 
     - RFC Destination (NW ABAP)
 
