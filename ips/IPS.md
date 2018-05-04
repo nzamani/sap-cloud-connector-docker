@@ -91,7 +91,7 @@ See [SAPCP Identity Provisioning Service on SAP HELP](https://help.sap.com/viewe
 
     **Important**: Make sure to save the generated OAuth Client Credentials (both Client ID and Client Secret)
 
-1. SAPCP Destinations (in SAPCP directly or in IPS Configuration - I prefer the latter)
+1. SAPCP Destinations (on SAPCP accouint level, for me it did not work as expected IPS level)
 
     - RFC Destination (NW ABAP)
 
@@ -114,8 +114,6 @@ See [SAPCP Identity Provisioning Service on SAP HELP](https://help.sap.com/viewe
       | jco.client.sysnr   | 00        |
 
     - HTTP Destination (SAPCP account, in our case to the trial account)
-
-      First create OAuth Client Credentials in SAPCP by going to **Security** -> **OAuth** -> **Platform API** and press **Press API Client**. In the dialog set a description and check **Authorization Management** (will add **Read Authorization** and **Manage Authorization** automatically) , then press "save". Make sure to save the generated OAuth Client Credentials (both Client ID and Client Secret).
 
       Now [create the destination](https://help.sap.com/viewer/f48e822d6d484fa5ade7dda78b64d9f5/Cloud/en-US/dcdf72892190449384ba522fa95b4e8e.html) using the generated OAuth Client Credentials:
 
