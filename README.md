@@ -8,7 +8,7 @@ See my YouTube video for additional details: [Installing SAP Cloud Connector (SA
 
 1. Install [Docker](https://www.docker.com/community-edition)
 
-**Windows:** Make sure you are running on Windows 10! For installing Docker you will need admin rights on your machine. Furthermore, you might have to run your Terminal/CLI as "Administrator" in case your current user is not an admin user (i.e. GitBash, PowerShell).
+    **Windows:** Make sure you are running on Windows 10! For installing Docker you will need admin rights on your machine. Furthermore, you might have to run your Terminal/CLI as "Administrator" in case your current user is not an admin user (i.e. GitBash, PowerShell).
 
 1. Install [Git](https://git-scm.com)
 
