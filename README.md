@@ -28,13 +28,13 @@ See my YouTube video for additional details: [Installing SAP Cloud Connector (SA
     - Without Proxy
 
         ```sh
-        docker build -t sapcc:2.11.0.3 .
+        docker build -t sapcc:2.11.1 .
         ```
 
     - Behind a Proxy
 
         ```sh
-        docker build --build-arg http_proxy=http://proxy.mycompany.corp:1234 --build-arg https_proxy=http://proxy.mycompany.corp:1234 -t sapcc:2.11.0.3 .
+        docker build --build-arg http_proxy=http://proxy.mycompany.corp:1234 --build-arg https_proxy=http://proxy.mycompany.corp:1234 -t sapcc:2.11.1 .
         ```
 
         **Hint:** In a proxy environment your `docker build` command (see above) will fail in case you don't set the proxy as mentioned above or in case you use wrong proxy settings. Also consider that you might have to set the proxy manually for some software installed in the container, i.e. for the SAPCC you can set it manually for each SAPCP connection.
@@ -44,13 +44,13 @@ See my YouTube video for additional details: [Installing SAP Cloud Connector (SA
     - Use this if you want to map the default SAP ports as they come on localhost (preferred)
 
         ```sh
-        docker run -p 8443:8443 -h mysapcc --name sapcc -d sapcc:2.11.0.3
+        docker run -p 8443:8443 -h mysapcc --name sapcc -d sapcc:2.11.1
         ```
 
     - Use this one if "random" ports on localhost are fine for you
 
         ```sh
-        docker run -P -h mysapcc --name sapcc -d sapcc:2.11.0.3
+        docker run -P -h mysapcc --name sapcc -d sapcc:2.11.1
         ```
 
 1. Starting/Stopping the container
