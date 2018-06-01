@@ -4,6 +4,8 @@ Easily setup SAPCC in docker.
 
 See my YouTube video for additional details: [Installing SAP Cloud Connector (SAPCC) into Docker and connecting it to SAP Cloud Platform (SAPCP)](https://www.youtube.com/watch?v=9uU1ny-0iNE)
 
+Check also my blog [Installing SAP Cloud Connector into Docker and connecting it to SAP Cloud Platform](https://blogs.sap.com/2018/05/22/installing-sap-cloud-connector-into-docker-and-connecting-it-to-sap-cloud-platform/). There You'll find links to the whole blog series.
+
 ## Instructions
 
 1. Install [Docker](https://www.docker.com/community-edition)
