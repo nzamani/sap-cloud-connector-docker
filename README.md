@@ -8,7 +8,7 @@ Check also my blog [Installing SAP Cloud Connector into Docker and connecting it
 
 ## Attribution
 
-The Docker file is based on [https://github.com/PaxSchweiz/SAPHCPConnector/blob/master/Dockerfile](https://github.com/PaxSchweiz/SAPHCPConnector/blob/master/Dockerfile)
+The Dockerfile is based on [https://github.com/PaxSchweiz/SAPHCPConnector/blob/master/Dockerfile](https://github.com/PaxSchweiz/SAPHCPConnector/blob/master/Dockerfile)
 
 ## Instructions
 
