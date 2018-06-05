@@ -6,6 +6,10 @@ See my YouTube video for additional details: [Installing SAP Cloud Connector (SA
 
 Check also my blog [Installing SAP Cloud Connector into Docker and connecting it to SAP Cloud Platform](https://blogs.sap.com/2018/05/22/installing-sap-cloud-connector-into-docker-and-connecting-it-to-sap-cloud-platform/). There you'll find links to the whole blog series.
 
+## Attribution
+
+The Docker file is based on [https://github.com/PaxSchweiz/SAPHCPConnector/blob/master/Dockerfile](https://github.com/PaxSchweiz/SAPHCPConnector/blob/master/Dockerfile)
+
 ## Instructions
 
 1. Install [Docker](https://www.docker.com/community-edition)
