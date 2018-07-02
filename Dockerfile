@@ -33,9 +33,9 @@ WORKDIR /tmp/sapdownloads
 # This automated download automatically accepts SAP's End User License Agreement (EULA).
 # Thus, when using this docker file as is you automatically accept SAP's EULA!
 RUN wget --no-check-certificate --no-cookies --header "Cookie: eula_3_1_agreed=tools.hana.ondemand.com/developer-license-3_1.txt; path=/;" -S https://tools.hana.ondemand.com/additional/sapcc-2.11.1-linux-x64.zip && \
-    wget --no-check-certificate --no-cookies --header "Cookie: eula_3_1_agreed=tools.hana.ondemand.com/developer-license-3_1.txt; path=/;" -S https://tools.hana.ondemand.com/additional/sapjvm-8.1.039-linux-x64.rpm && \
+    wget --no-check-certificate --no-cookies --header "Cookie: eula_3_1_agreed=tools.hana.ondemand.com/developer-license-3_1.txt; path=/;" -S https://tools.hana.ondemand.com/additional/sapjvm-8.1.041-linux-x64.rpm && \
     unzip sapcc-2.11.1-linux-x64.zip && \
-    rpm -i sapjvm-8.1.039-linux-x64.rpm && rpm -i com.sap.scc-ui-2.11.1-2.x86_64.rpm
+    rpm -i sapjvm-8.1.041-linux-x64.rpm && rpm -i com.sap.scc-ui-2.11.1-2.x86_64.rpm
 
 # HINT:
 # In case the downloads fail you might have to update the wget urls.
