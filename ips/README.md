@@ -122,7 +122,7 @@ See [SAPCP Identity Provisioning Service on SAP HELP](https://help.sap.com/viewe
       | Name           | IPS_TARGET_MYTRIAL_SAPCP                                                  |
       | Type           | HTTP                                                                      |
       | Description    | IPS Target to My SAPCP Trial                                              |
-      | URL            | https://api.hanatrial.ondemand.com/authorization/v1/accounts/p123456trial |
+      | URL            | [https://api.hanatrial.ondemand.com/authorization/v1/accounts/p123456trial](https://api.hanatrial.ondemand.com/authorization/v1/accounts/p123456trial) |
       | Proxy Type     | Internet                                                                  |
       | Authentication | BasicAuthentication                                                       |
       | User           | Client ID                                                                 |
@@ -132,7 +132,7 @@ See [SAPCP Identity Provisioning Service on SAP HELP](https://help.sap.com/viewe
 
       | Property              | Value                                             |
       |:----------------------|:--------------------------------------------------|
-      | OAuth2TokenServiceURL | https://hanatrial.ondemand.com/oauth2/apitoken/v1 |
+      | OAuth2TokenServiceURL | [https://api.hanatrial.ondemand.com/oauth2/apitoken/v1](https://api.hanatrial.ondemand.com/oauth2/apitoken/v1) |
 
       Also make sure to check "Use default JDK truststore".
 
