@@ -4,7 +4,7 @@ FROM centos:7
 # General information
 ################################################################
 LABEL com.nabisoft.sapcc.version="2.11.3"
-LABEL com.nabisoft.sapcc.sapjvm.version="8.1.048"
+LABEL com.nabisoft.sapcc.sapjvm.version="8.1.050"
 LABEL com.nabisoft.sapcc.vendor="Nabi Zamani"
 LABEL com.nabisoft.sapcc.name="SAP Cloud Connector"
 
@@ -12,7 +12,7 @@ LABEL com.nabisoft.sapcc.name="SAP Cloud Connector"
 # Upgrade + install dependencies
 ################################################################
 #RUN yum -y upgrade
-RUN yum -y install initscripts which unzip wget net-tools less sed
+RUN yum -y install initscripts which unzip wget net-tools less
 
 ################################################################
 # Install dependencies and the SAP packages
@@ -33,22 +33,10 @@ WORKDIR /tmp/sapdownloads
 # This automated download automatically accepts SAP's End User License Agreement (EULA).
 # Thus, when using this docker file as is you automatically accept SAP's EULA!
 RUN wget --no-check-certificate --no-cookies --header "Cookie: eula_3_1_agreed=tools.hana.ondemand.com/developer-license-3_1.txt; path=/;" -S https://tools.hana.ondemand.com/additional/sapcc-2.11.3-linux-x64.zip && \
-    wget --no-check-certificate --no-cookies --header "Cookie: eula_3_1_agreed=tools.hana.ondemand.com/developer-license-3_1.txt; path=/;" -S https://tools.hana.ondemand.com/additional/sapjvm-8.1.048-linux-x64.rpm && \
+    wget --no-check-certificate --no-cookies --header "Cookie: eula_3_1_agreed=tools.hana.ondemand.com/developer-license-3_1.txt; path=/;" -S https://tools.hana.ondemand.com/additional/sapjvm-8.1.050-linux-x64.rpm && \
     unzip sapcc-2.11.3-linux-x64.zip && \
-    rpm -i sapjvm-8.1.048-linux-x64.rpm && \
+    rpm -i sapjvm-8.1.050-linux-x64.rpm && \
 	rpm -i com.sap.scc-ui-2.11.3-6.x86_64.rpm
-
-#####################################################################################################
-#IMPORTANT: can't use certain Java runtimes as described in https://launchpad.support.sap.com/#/notes/2745641 (see also https://bugs.openjdk.java.net/browse/JDK-8217579):
-# - Oracle JDK 1.8.0_201 or higher
-# - SAP JVM 8.1.048 or higher
-# - SAP JVM 7.1.62 or higher
-# These versions would make the SAPCC not responding as expected when run in Docker.
-# Workaround for now as suggested in the note mentioned above:
-# remove NULL from jdk.tls.disabledAlgorithms in file /opt/sapjvm_8/jre/lib/security/java.security (quick and dirty command):
-RUN sed -i 's/EC keySize < 224, 3DES_EDE_CBC, anon, NULL/EC keySize < 224, 3DES_EDE_CBC, anon/g' /opt/sapjvm_8/jre/lib/security/java.security
-# This complete block here can be removed in future whenever a fixed versoin of SAP JVM is available!
-#####################################################################################################
 
 # You could also use Oracle JDK (feel free to skip JCE download + installation)
 #RUN wget --no-check-certificate --no-cookies --header "Cookie: gpw_e24=http%3a%2F%2Fwww.oracle.com%2Ftechnetwork%2Fjava%2Fjavase%2Fdownloads%2Fjdk8-downloads-2133151.html; oraclelicense=accept-securebackup-cookie;" -S "https://download.oracle.com/otn-pub/java/jdk/8u202-b08/1961070e4c9b4e26a04e7f5a083f551e/jdk-8u202-linux-x64.rpm" && \
