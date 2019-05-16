@@ -52,10 +52,13 @@ RUN wget --no-check-certificate --no-cookies --header "Cookie: eula_3_1_agreed=t
 # In such cases please also let me know by opening an issue so that I can update this dockerfile.
 
 # Docker is based on PID 1, but service is already started bacause of rpm installation.
-# Furthermore, we donät want to run the container in a "--privileged" container.
+# Furthermore, we don't want to run the container in a "--privileged" container.
 # Solution: Stop service + start the java process manually (see CMD below).
 # Hint: changing the shell to bash via chsh is optional.
-RUN service scc_daemon stop && chsh -s /bin/bash sccadmin
+#RUN service scc_daemon stop && chsh -s /bin/bash sccadmin
+### this is not needed anymore because auto start via rpm fails anyway, so no need to stop
+#   let's just switch to bash (optional)
+RUN chsh -s /bin/bash sccadmin
 
 # Recommended: Replace the Default SSL Certificate ==> https://help.sap.com/viewer/cca91383641e40ffbe03bdc78f00f681/Cloud/en-US/bcd5e113c9164ae8a443325692cd5b12.html
 ## Use a Self-Signed Certificate ==> https://help.sap.com/viewer/cca91383641e40ffbe03bdc78f00f681/Cloud/en-US/57cb635955224bd58ac917a42bead117.html
