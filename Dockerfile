@@ -32,11 +32,11 @@ WORKDIR /tmp/sapdownloads
 # ATTENTION:
 # This automated download automatically accepts SAP's End User License Agreement (EULA).
 # Thus, when using this docker file as is you automatically accept SAP's EULA!
-RUN wget --no-check-certificate --no-cookies --header "Cookie: eula_3_1_agreed=tools.hana.ondemand.com/developer-license-3_1.txt; path=/;" -S https://tools.hana.ondemand.com/additional/sapcc-2.12.1.1-linux-x64.zip && \
-    wget --no-check-certificate --no-cookies --header "Cookie: eula_3_1_agreed=tools.hana.ondemand.com/developer-license-3_1.txt; path=/;" -S https://tools.hana.ondemand.com/additional/sapjvm-8.1.055-linux-x64.rpm && \
-    unzip sapcc-2.12.1.1-linux-x64.zip && \
-    rpm -i sapjvm-8.1.055-linux-x64.rpm && \
-	rpm -i com.sap.scc-ui-2.12.1-5.x86_64.rpm
+RUN wget --no-check-certificate --no-cookies --header "Cookie: eula_3_1_agreed=tools.hana.ondemand.com/developer-license-3_1.txt; path=/;" -S https://tools.hana.ondemand.com/additional/sapcc-2.12.3-linux-x64.zip && \
+    wget --no-check-certificate --no-cookies --header "Cookie: eula_3_1_agreed=tools.hana.ondemand.com/developer-license-3_1.txt; path=/;" -S https://tools.hana.ondemand.com/additional/sapjvm-8.1.062-linux-x64.rpm && \
+    unzip sapcc-2.12.3-linux-x64.zip && \
+    rpm -i sapjvm-8.1.062-linux-x64.rpm && \
+	rpm -i com.sap.scc-ui-2.12.3-8.x86_64.rpm
 
 # You could also use Oracle JDK (feel free to skip JCE download + installation)
 #RUN wget --no-check-certificate --no-cookies --header "Cookie: gpw_e24=http%3a%2F%2Fwww.oracle.com%2Ftechnetwork%2Fjava%2Fjavase%2Fdownloads%2Fjdk8-downloads-2133151.html; oraclelicense=accept-securebackup-cookie;" -S "https://download.oracle.com/otn-pub/java/jdk/8u202-b08/1961070e4c9b4e26a04e7f5a083f551e/jdk-8u202-linux-x64.rpm" && \
