@@ -3,8 +3,8 @@ FROM centos:7
 ################################################################
 # General information
 ################################################################
-LABEL com.nabisoft.sapcc.version="2.12.3"
-LABEL com.nabisoft.sapcc.sapjvm.version="8.1.062"
+LABEL com.nabisoft.sapcc.version="2.12.4"
+LABEL com.nabisoft.sapcc.sapjvm.version="8.1.063"
 
 ################################################################
 # Upgrade + install dependencies
@@ -117,6 +117,6 @@ CMD /opt/sapjvm_8/bin/java \
 
 #HINT:
 # The CMD above is basically derived from the SAPCC "portable" archives which can be
-# downloaded from https://tools.hana.ondemand.com/#cloud, i.e. sapcc-2.12.3-windows-x64.zip, sapcc-2.12.3-linux-x64.tar.gz, sapcc-2.12.3-macosx-x64.tar.gz
+# downloaded from https://tools.hana.ondemand.com/#cloud, i.e. sapcc-2.12.4-windows-x64.zip, sapcc-2.12.4-linux-x64.tar.gz, sapcc-2.12.4-macosx-x64.tar.gz
 # To verify this, simply extract any of these archives and check the files "deamon.sh" and "props.ini".
 # The first 4 option in CMD are derived from deamon.sh, all other options are derived from the props.ini file.
