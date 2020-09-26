@@ -4,7 +4,7 @@ FROM centos:7
 # General information
 ################################################################
 LABEL com.nabisoft.sapcc.version="2.12.4"
-LABEL com.nabisoft.sapcc.sapjvm.version="8.1.063"
+LABEL com.nabisoft.sapcc.sapjvm.version="8.1.065"
 
 ################################################################
 # Upgrade + install dependencies
@@ -31,9 +31,9 @@ WORKDIR /tmp/sapdownloads
 # This automated download automatically accepts SAP's End User License Agreement (EULA).
 # Thus, when using this docker file as is you automatically accept SAP's EULA!
 RUN wget --no-check-certificate --no-cookies --header "Cookie: eula_3_1_agreed=tools.hana.ondemand.com/developer-license-3_1.txt; path=/;" -S https://tools.hana.ondemand.com/additional/sapcc-2.12.4-linux-x64.zip && \
-    wget --no-check-certificate --no-cookies --header "Cookie: eula_3_1_agreed=tools.hana.ondemand.com/developer-license-3_1.txt; path=/;" -S https://tools.hana.ondemand.com/additional/sapjvm-8.1.063-linux-x64.rpm && \
+    wget --no-check-certificate --no-cookies --header "Cookie: eula_3_1_agreed=tools.hana.ondemand.com/developer-license-3_1.txt; path=/;" -S https://tools.hana.ondemand.com/additional/sapjvm-8.1.065-linux-x64.rpm && \
     unzip sapcc-2.12.4-linux-x64.zip && \
-    rpm -i sapjvm-8.1.063-linux-x64.rpm && \
+    rpm -i sapjvm-8.1.065-linux-x64.rpm && \
 	rpm -i com.sap.scc-ui-2.12.4-4.x86_64.rpm
 
 # You could also use Oracle JDK (feel free to skip JCE download + installation)
