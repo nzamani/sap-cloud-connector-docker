@@ -29,18 +29,51 @@ The Dockerfile is based on [https://github.com/PaxSchweiz/SAPHCPConnector/blob/m
     cd sap-cloud-connector-docker
     ```
 
+1. Check current version of sapcc
+
+   - Goto [tools.hanaondemand.com](https://tools.hana.ondemand.com/#cloud) 
+
+   - Write down the current version of **Cloud Connector** (e.g. 2.12.5).
+
+   - Write down the current version of **SAP JVM** (e.g. 8.1.067)
+
+1. Update Dockerfile
+
+   Open the Dockerfile in this folder and replace the version numbers of the following lines with the numbers you wrote down. You find the lines right at the top of the file.
+
+   ```sh
+   ARG SAPCC_VERSION=2.12.5
+   ARG SAPJVM_VERSION=8.1.067
+   ```
+
+   Also update these lines with the new version numbers
+
+   ```
+   LABEL com.nabisoft.sapcc.version="2.12.5"
+   LABEL com.nabisoft.sapcc.sapjvm.version="8.1.067"
+   ```
+
+1. Instructions for the following commands
+
+   **In the following chapters replace the placeholder _\<sapcc-version\>_ with the sapcc version you wrote down.**
+
 1. Build the Docker image
 
     - Without Proxy
 
         ```sh
-        docker build -t sapcc:2.12.4 .
+        docker build -t sapcc:<sapcc-version> .
+        e.g.
+        docker build -t sapcc:2.12.5 .
         ```
+        **Hint:** don't forget the dot at the end of the line.
 
     - Behind a Proxy
 
         ```sh
-        docker build --build-arg http_proxy=http://proxy.mycompany.corp:1234 --build-arg https_proxy=http://proxy.mycompany.corp:1234 -t sapcc:2.12.4 .
+        docker build --build-arg http_proxy=http://proxy.mycompany.corp:1234 --build-arg https_proxy=http://proxy.mycompany.corp:1234 -t sapcc:<sapcc-version> .
+        e.g.
+        docker build --build-arg http_proxy=http://proxy.mycompany.corp:1234 --build-arg https_proxy=http://proxy.mycompany.corp:1234 -t sapcc:2.12.5 .
         ```
 
         **Hint:** In a proxy environment your `docker build` command (see above) will fail in case you don't set the proxy as mentioned above or in case you use wrong proxy settings. Also consider that you might have to set the proxy manually for some software installed in the container, i.e. for the SAPCC you can set it manually for each SAPCP connection.
@@ -50,13 +83,17 @@ The Dockerfile is based on [https://github.com/PaxSchweiz/SAPHCPConnector/blob/m
     - Use this if you want to map the default SAP ports as they come on localhost (preferred)
 
         ```sh
-        docker run -p 8443:8443 -h mysapcc --name sapcc -d sapcc:2.12.4
+        docker run -p 8443:8443 -h mysapcc --name sapcc -d sapcc:<sapcc-version>
+        e.g.
+        docker run -p 8443:8443 -h mysapcc --name sapcc -d sapcc:2.12.5
         ```
 
     - Use this one if "random" ports on localhost are fine for you
 
         ```sh
-        docker run -P -h mysapcc --name sapcc -d sapcc:2.12.4
+        docker run -P -h mysapcc --name sapcc -d sapcc:<sapcc-version>
+        e.g.
+        docker run -P -h mysapcc --name sapcc -d sapcc:2.12.5
         ```
 
 1. Starting/Stopping the container
