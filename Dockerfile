@@ -113,6 +113,7 @@ CMD /opt/sapjvm_8/bin/java \
   -Dosgi.embedded.cleanupOnSave=true \
   -Dosgi.usesLimit=30 \
   -Djava.awt.headless=true \
+  -Djdk.tls.server.protocols=TLSv1.2 \
   -Dio.netty.recycler.maxCapacity.default=256 \
   -jar plugins/org.eclipse.equinox.launcher_1.1.0.v20100507.jar
 
