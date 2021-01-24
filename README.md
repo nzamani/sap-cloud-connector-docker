@@ -121,6 +121,25 @@ The Dockerfile is based on [https://github.com/PaxSchweiz/SAPHCPConnector/blob/m
 
     A proxy can be set manually for each SAPCP connection after [logging on](https://localhost:8443) to the SAPCC using a browser. Make sure to use the correct proxy settings (incl. credentials if required), otherwise your SAPCC might not be able to connect to your SAPCC account.
 
+## Browsers
+
+Your browser will not trust the certificate of your SAPCC, and that's expected behavior. However, access must work on any browser.
+
+- **macOS Safari:**
+
+    Access your SAPCC by clicking the button **Show Details** and afterwards simply click the link **visit this website** (a little hidden in the text flow).
+
+- **Chrome:**
+
+    The good old "access anyway" button is not displayed anymore. And here is the trick for Chrome on your macOS (should work on Windows as well):
+  - Focus the Chrome page/tab which shows the warning by clicking somewhere on the corresponding page
+  - Just type **thisisunsafe** (don't think about it, you'll see)
+  - voila, here you go... :-)
+
+  For details see
+  - https://twitter.com/zairwolf/status/1196878125734486021
+  - https://stackoverflow.com/questions/58802767/no-proceed-anyway-option-on-neterr-cert-invalid-in-chrome-on-macos
+
 ## Docker Configuration and Commands
 
 ### Creating a Network called `saptrial`
