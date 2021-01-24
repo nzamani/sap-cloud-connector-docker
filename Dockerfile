@@ -3,21 +3,15 @@ FROM centos:7
 ################################################################
 # DEFINE sapcc and jvm version
 ################################################################
-ARG SAPCC_VERSION=2.12.5
+ARG SAPCC_VERSION=2.13.0
 ARG SAPJVM_VERSION=8.1.067
-
-################################################################
-# General information
-################################################################
-LABEL com.nabisoft.sapcc.version="2.12.5"
-LABEL com.nabisoft.sapcc.sapjvm.version="8.1.067"
-
 
 ################################################################
 # Upgrade + install dependencies
 ################################################################
 #RUN yum -y upgrade
-RUN yum -y install initscripts which unzip wget net-tools less
+#RUN yum -y update; yum clean all
+RUN yum -y install which unzip wget net-tools less; yum clean all
 
 ################################################################
 # Install dependencies and the SAP packages
@@ -41,27 +35,15 @@ RUN wget --no-check-certificate --no-cookies --header "Cookie: eula_3_1_agreed=t
     wget --no-check-certificate --no-cookies --header "Cookie: eula_3_1_agreed=tools.hana.ondemand.com/developer-license-3_1.txt; path=/;" -S https://tools.hana.ondemand.com/additional/sapjvm-$SAPJVM_VERSION-linux-x64.rpm && \
     unzip sapcc-$SAPCC_VERSION-linux-x64.zip && \
     rpm -i sapjvm-$SAPJVM_VERSION-linux-x64.rpm && \
-	rpm -i com.sap.scc-ui-$SAPCC_VERSION-4.x86_64.rpm
+		rpm -i com.sap.scc-ui-$SAPCC_VERSION-8.x86_64.rpm
 
-# You could also use Oracle JDK (feel free to skip JCE download + installation)
-#RUN wget --no-check-certificate --no-cookies --header "Cookie: gpw_e24=http%3a%2F%2Fwww.oracle.com%2Ftechnetwork%2Fjava%2Fjavase%2Fdownloads%2Fjdk8-downloads-2133151.html; oraclelicense=accept-securebackup-cookie;" -S "https://download.oracle.com/otn-pub/java/jdk/8u202-b08/1961070e4c9b4e26a04e7f5a083f551e/jdk-8u202-linux-x64.rpm" && \
-#    wget --no-check-certificate --no-cookies --header "Cookie: gpw_e24=http%3a%2F%2Fwww.oracle.com%2Ftechnetwork%2Fjava%2Fjavase%2Fdownloads%2Fjdk8-downloads-2133151.html; oraclelicense=accept-securebackup-cookie;" -S "http://download.oracle.com/otn-pub/java/jce/8/jce_policy-8.zip" && \
-#    rpm -i jdk-8u202-linux-x64.rpm && \
-#    unzip jce_policy-8.zip && rm jce_policy-8.zip && cp -v UnlimitedJCEPolicyJDK8/*.jar /usr/java/default/jre/lib/security/ && \
-#    wget --no-check-certificate --no-cookies --header "Cookie: eula_3_1_agreed=tools.hana.ondemand.com/developer-license-3_1.txt; path=/;" -S https://tools.hana.ondemand.com/additional/sapcc-2.12.1.1-linux-x64.zip && \
-#    unzip sapcc-2.12.1.1-linux-x64.zip && rpm -i com.sap.scc-ui-2.12.1-5.x86_64.rpm
+# set JAVA_HOME because this is needed by go.sh below, athers are calulated
+ENV JAVA_HOME=/opt/sapjvm_8/
+#ENV CATALINA_BASE=/opt/sap/scc
+#ENV CATALINA_HOME=/opt/sap/scc
+#ENV CATALINA_TMPDIR=/opt/sap/scc/temp
+#ENV SAPJVM_HOME=/opt/sapjvm_8/
 
-
-# HINT:
-# In case the downloads fail you might have to update the wget urls.
-# In such cases please also let me know by opening an issue so that I can update this dockerfile.
-
-# Docker is based on PID 1, but service is already started bacause of rpm installation.
-# Furthermore, we don't want to run the container in a "--privileged" container.
-# Solution: Stop service + start the java process manually (see CMD below).
-# Hint: changing the shell to bash via chsh is optional.
-#RUN service scc_daemon stop && chsh -s /bin/bash sccadmin
-### this is not needed anymore because auto start via rpm fails anyway, so no need to stop
 #   let's just switch to bash (optional)
 RUN chsh -s /bin/bash sccadmin
 
@@ -82,49 +64,4 @@ USER sccadmin
 WORKDIR /opt/sap/scc
 
 # finally run sapcc as PID 1
-
-# For Oracle JDK use this command:
-#CMD /usr/bin/java \
-# SAP JVM
-CMD /opt/sapjvm_8/bin/java \
-  -server \
-  -XtraceFile=log/vm_@PID_trace.log \
-  -XX:+GCHistory \
-  -XX:GCHistoryFilename=log/vm_@PID_gc.prf \
-  -XX:+HeapDumpOnOutOfMemoryError \
-  -XX:+DisableExplicitGC \
-  -Xms1024m \
-  -Xmx1024m \
-  -XX:MaxNewSize=512m \
-  -XX:NewSize=512m \
-  -XX:+UseConcMarkSweepGC \
-  -XX:TargetSurvivorRatio=85 \
-  -XX:SurvivorRatio=6 \
-  -XX:MaxDirectMemorySize=2G \
-  -Dorg.apache.tomcat.util.digester.PROPERTY_SOURCE=com.sap.scc.tomcat.utils.PropertyDigester \
-  -Dosgi.requiredJavaVersion=1.6 \
-  -Dosgi.install.area=. \
-  -DuseNaming=osgi \
-  -Dorg.eclipse.equinox.simpleconfigurator.exclusiveInstallation=false \
-  -Dcom.sap.core.process=ljs_node \
-  -Declipse.ignoreApp=true \
-  -Dosgi.noShutdown=true \
-  -Dosgi.framework.activeThreadType=normal \
-  -Dosgi.embedded.cleanupOnSave=true \
-  -Dosgi.usesLimit=30 \
-  -Djava.awt.headless=true \
-  -Djdk.tls.server.protocols=TLSv1.2 \
-  -Dio.netty.recycler.maxCapacity.default=256 \
-  -jar plugins/org.eclipse.equinox.launcher_1.1.0.v20100507.jar
-
-#	-Xdebug \
-#	-Xrunjdwp:transport=dt_socket,address=8000,server=y,suspend=n \
-#	-console
-
-#CMD ["/opt/sapjvm_8/bin/java","-server","-XtraceFile=log/vm_@PID_trace.log","-XX:+GCHistory","-XX:GCHistoryFilename=log/vm_@PID_gc.prf","-XX:+HeapDumpOnOutOfMemoryError","-XX:+DisableExplicitGC","-Xms1024m","-Xmx1024m","-XX:MaxNewSize=512m","-XX:NewSize=512m","-XX:+UseConcMarkSweepGC","-XX:TargetSurvivorRatio=85","-XX:SurvivorRatio=6","-XX:MaxDirectMemorySize=2G","-Dorg.apache.tomcat.util.digester.PROPERTY_SOURCE=com.sap.scc.tomcat.utils.PropertyDigester","-Dosgi.requiredJavaVersion=1.6","-Dosgi.install.area=.","-DuseNaming=osgi","-Dorg.eclipse.equinox.simpleconfigurator.exclusiveInstallation=false","-Dcom.sap.core.process=ljs_node","-Declipse.ignoreApp=true","-Dosgi.noShutdown=true","-Dosgi.framework.activeThreadType=normal","-Dosgi.embedded.cleanupOnSave=true","-Dosgi.usesLimit=30","-Djava.awt.headless=true","-Dio.netty.recycler.maxCapacity.default=256","-jar plugins/org.eclipse.equinox.launcher_1.1.0.v20100507.jar"]
-
-#HINT:
-# The CMD above is basically derived from the SAPCC "portable" archives which can be
-# downloaded from https://tools.hana.ondemand.com/#cloud, i.e. sapcc-2.12.4-windows-x64.zip, sapcc-2.12.4-linux-x64.tar.gz, sapcc-2.12.4-macosx-x64.tar.gz
-# To verify this, simply extract any of these archives and check the files "deamon.sh" and "props.ini".
-# The first 4 option in CMD are derived from deamon.sh, all other options are derived from the props.ini file.
+CMD ./go.sh
