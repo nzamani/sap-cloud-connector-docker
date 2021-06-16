@@ -4,7 +4,7 @@ FROM centos:7
 # DEFINE sapcc and jvm version
 ################################################################
 ARG SAPCC_VERSION=2.13.1
-ARG SAPJVM_VERSION=8.1.072
+ARG SAPJVM_VERSION=8.1.075
 
 ################################################################
 # Upgrade + install dependencies
