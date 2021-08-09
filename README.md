@@ -48,31 +48,40 @@ The Dockerfile is based on [https://github.com/PaxSchweiz/SAPHCPConnector/blob/m
 
 1. Instructions for the following commands
 
-   **In the following chapters replace the placeholder _\<sapcc-version\>_ with the sapcc version you wrote down.**
+   **In the following chapters replace the placeholders _\<sapcc-version\>_ and _\<sapjvm_version\>_ with the version numbers you wrote down.**
 
 1. Build the Docker image
 
-    - Without Proxy
+   ```sh
+   #docker build \
+   #  --build-arg SAPJVM_VERSION=<sapjvm-version> \
+   #  --build-arg SAPCC_VERSION=<sapcc-version> \
+   #  -t sapcc:<sapcc-version> .
 
-        ```sh
-        #docker build -t sapcc:<sapcc-version> .
-        #example:
-        docker build -t sapcc:2.13.2 .
-        ```
+   #example:
 
-        **Hint:** Don't forget the dot at the end of the line!
+   docker build \
+     --build-arg SAPJVM_VERSION=8.1.075 \
+     --build-arg SAPCC_VERSION=2.13.2 \
+     -t sapcc:2.13.2 .
+   ```
 
-    - Behind a Proxy
+   **Hint:** Don't forget the dot at the end of the line!
 
-        ```sh
-        #docker build --build-arg http_proxy=http://proxy.mycompany.corp:1234 --build-arg https_proxy=http://proxy.mycompany.corp:1234 -t sapcc:<sapcc-version> .
-        #example:
-        docker build --build-arg http_proxy=http://proxy.mycompany.corp:1234 --build-arg https_proxy=http://proxy.mycompany.corp:1234 -t sapcc:2.13.2 .
-        ```
+   If you're behind a proxy, add one or both of the following extra build arguments with appropriate values: `http_proxy` and `https_proxy`. If adding these arguments to the `docker build` invocation on separate lines, don't forget to escape the newlines at the end with `\`, e.g.:
 
-        **Hint:** In a proxy environment your `docker build` command (see above) will fail in case you don't set the proxy as mentioned above or in case you use wrong proxy settings. Also consider that you might have to set the proxy manually for some software installed in the container, i.e. for the SAPCC you can set it manually for each SAPCP connection.
+   ```sh
+   docker build \
+     --build-arg SAPJVM_VERSION=8.1.075 \
+     --build-arg SAPCC_VERSION=2.13.2 \
+     --build-arg http_proxy=http://proxy.mycompany.corp:1234 \
+     --build-arg https_proxy=http://proxy.mycompany.corp:1234 \
+     -t sapcc:2.13.2 .
+   ```
 
-    **HINT:** Ignore the following errors: "Failed to get D-Bus connection: Operation not permitted"
+   **Hint:** In a proxy environment your `docker build` command (see above) will fail in case you don't set the proxy as mentioned above or in case you use wrong proxy settings. Also consider that you might have to set the proxy manually for some software installed in the container, i.e. for the SAPCC you can set it manually for each SAPCP connection.
+
+   **HINT:** Ignore the following errors: "Failed to get D-Bus connection: Operation not permitted"
 
 1. Create a container running as a deamon
 
