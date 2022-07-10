@@ -3,8 +3,8 @@ FROM centos:7
 ################################################################
 # DEFINE sapcc and jvm version
 ################################################################
-ARG SAPCC_VERSION=2.13.2
-ARG SAPJVM_VERSION=8.1.075
+ARG SAPCC_VERSION=2.14.2
+ARG SAPJVM_VERSION=8.1.088
 
 ################################################################
 # Upgrade + install dependencies
@@ -37,7 +37,7 @@ RUN wget --no-check-certificate --no-cookies --header "Cookie: eula_3_1_agreed=t
     rpm -i sapjvm-$SAPJVM_VERSION-linux-x64.rpm && \
 		rpm -i com.sap.scc-ui-${SAPCC_VERSION}*.x86_64.rpm
 
-# set JAVA_HOME because this is needed by go.sh below, athers are calulated
+# set JAVA_HOME because this is needed by go.sh below, others are calulated
 ENV JAVA_HOME=/opt/sapjvm_8/
 #ENV CATALINA_BASE=/opt/sap/scc
 #ENV CATALINA_HOME=/opt/sap/scc
@@ -62,6 +62,8 @@ RUN chsh -s /bin/bash sccadmin
 EXPOSE 8443
 USER sccadmin
 WORKDIR /opt/sap/scc
+
+# survive container destruction/recreation
 VOLUME /opt/sap/scc/config
 VOLUME /opt/sap/scc/scc_config
 VOLUME /opt/sap/scc/log
