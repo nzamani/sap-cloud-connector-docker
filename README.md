@@ -35,7 +35,7 @@ The Dockerfile is based on [https://github.com/PaxSchweiz/SAPHCPConnector/blob/m
 
    - Write down the current version of **Cloud Connector** (e.g. 2.14.2).
 
-   - Write down the current version of **SAP JVM** (e.g. 8.1.088)
+   - Write down the current version of **SAP JVM** (e.g. 8.1.089)
 
 1. Update Dockerfile
 
@@ -43,7 +43,7 @@ The Dockerfile is based on [https://github.com/PaxSchweiz/SAPHCPConnector/blob/m
 
    ```Dockerfile
    ARG SAPCC_VERSION=2.14.2
-   ARG SAPJVM_VERSION=8.1.088
+   ARG SAPJVM_VERSION=8.1.089
    ```
 
 1. Instructions for the following commands
@@ -65,7 +65,7 @@ The Dockerfile is based on [https://github.com/PaxSchweiz/SAPHCPConnector/blob/m
    
    # or pass your own version(s)
    docker build \
-     --build-arg SAPJVM_VERSION=8.1.088 \
+     --build-arg SAPJVM_VERSION=8.1.089 \
      --build-arg SAPCC_VERSION=2.14.2 \
      -t sapcc:2.14.2 .
    ```
@@ -76,7 +76,7 @@ The Dockerfile is based on [https://github.com/PaxSchweiz/SAPHCPConnector/blob/m
 
    ```sh
    docker build \
-     --build-arg SAPJVM_VERSION=8.1.088 \
+     --build-arg SAPJVM_VERSION=8.1.089 \
      --build-arg SAPCC_VERSION=2.14.2 \
      --build-arg http_proxy=http://proxy.mycompany.corp:1234 \
      --build-arg https_proxy=http://proxy.mycompany.corp:1234 \
