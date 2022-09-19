@@ -71,6 +71,12 @@ The Dockerfile is based on [https://github.com/PaxSchweiz/SAPHCPConnector/blob/m
    ```
 
    **Hint:** Don't forget the dot at the end of the line!
+   
+   > If you're trying to build the image on a MacBook with an M1/M2 (ARM architecture) chip, you'll need to specify the platform in the docker build command to build the image for the x86 architecture. Note that when running the image, macOS will automagically run the container using Rosetta. For more information: [https://docs.docker.com/desktop/mac/apple-silicon/](https://docs.docker.com/desktop/mac/apple-silicon/).
+
+    > ```bash
+    > docker build -t sapcc:2.14.2 --platform linux/amd64 .
+    > ```
 
    If you're behind a proxy, add one or both of the following extra build arguments with appropriate values: `http_proxy` and `https_proxy`. If adding these arguments to the `docker build` invocation on separate lines, don't forget to escape the newlines at the end with `\`, e.g.:
 
