@@ -250,8 +250,8 @@ can be used:
 
 1. **Youtube:** [SAP HANA Academy - SAP CP: Blueprint #1.6: Principal Propagation using X509 certificates](https://www.youtube.com/watch?v=gt_Ja9ldHnY)
 
-1. **SAP Help:** [Creating a Self-Signed Root Certificate Authority](https://help.hana.ondemand.com/hana_cloud_platform_mobile_services_preview/frameset.htm?590e173911084f17b73caff26f79a4ae.html)
+1. **SAP Help:** [Creating a Self-Signed Root Certificate Authority](https://help.sap.com/docs/SAP_MOBILE_SERVICES/33c4b62fdc174d89a47d4baee3ced08a/590e173911084f17b73caff26f79a4ae.html)
 
-1. **SAP Help:** [Creating Intermediate Certificates](https://help.hana.ondemand.com/hana_cloud_platform_mobile_services_preview/frameset.htm?713d30fa7aa346f39896acd1229dc06f.html)
+1. **SAP Help:** [Creating Intermediate Certificates](https://help.sap.com/docs/SAP_MOBILE_SERVICES/33c4b62fdc174d89a47d4baee3ced08a/713d30fa7aa346f39896acd1229dc06f.html)
 
 1. **SAP Community:** [How to Guide – Principal Propagation in an HTTPS Scenario](https://blogs.sap.com/2017/06/22/how-to-guide-principal-propagation-in-an-https-scenario/)
