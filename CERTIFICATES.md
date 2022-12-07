@@ -18,7 +18,7 @@ Follow the steps mentioned here to generate self signed certificates with openOp
     wget https://raw.githubusercontent.com/nzamani/sap-cloud-connector-docker/master/certs/ca.conf
     ```
 
-    **Hint:** ca.conf was created by following step 2 on [Creating Intermediate Certificates](https://help.hana.ondemand.com/hana_cloud_platform_mobile_services_preview/frameset.htm?713d30fa7aa346f39896acd1229dc06f.html). However, the config on this site is buggy. The ca.conf as part of this repo is a fixed one.
+    **Hint:** ca.conf was created by following step 2 on [Creating Intermediate Certificates](https://help.sap.com/docs/SAP_MOBILE_SERVICES/33c4b62fdc174d89a47d4baee3ced08a/713d30fa7aa346f39896acd1229dc06f.html). However, the config on this site is buggy. The ca.conf as part of this repo is a fixed one.
 
 1. Execute the following commands:
 
