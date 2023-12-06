@@ -33,17 +33,17 @@ The Dockerfile is based on [https://github.com/PaxSchweiz/SAPHCPConnector/blob/m
 
    - Goto [tools.hanaondemand.com](https://tools.hana.ondemand.com/#cloud)
 
-   - Write down the current version of **Cloud Connector** (e.g. 2.15.0).
+   - Write down the current version of **Cloud Connector** (e.g. 2.16.1).
 
-   - Write down the current version of **SAP JVM** (e.g. 8.1.090)
+   - Write down the current version of **SAP JVM** (e.g. 8.1.096)
 
 1. Update Dockerfile
 
    Open the Dockerfile in this folder and replace the version numbers of the following lines with the numbers you wrote down. You find the lines right at the top of the file.
 
    ```Dockerfile
-   ARG SAPCC_VERSION=2.15.0
-   ARG SAPJVM_VERSION=8.1.090
+   ARG SAPCC_VERSION=2.16.1
+   ARG SAPJVM_VERSION=8.1.096
    ```
 
 1. Instructions for the following commands
@@ -61,32 +61,29 @@ The Dockerfile is based on [https://github.com/PaxSchweiz/SAPHCPConnector/blob/m
    #example:
 
    # use the versions inside Dockerfile
-   docker build -t sapcc:2.15.0 .
+   docker build -t sapcc:2.16.1 .
+
+   # for Apple Silicon (ARM, i.e. M1/M2/M3) pass the platform (see https://docs.docker.com/desktop/mac/apple-silicon/)
+   docker build -t sapcc:2.16.1 --platform linux/amd64 .
    
    # or pass your own version(s)
    docker build \
-     --build-arg SAPJVM_VERSION=8.1.090 \
-     --build-arg SAPCC_VERSION=2.15.0 \
-     -t sapcc:2.15.0 .
+     --build-arg SAPJVM_VERSION=8.1.096 \
+     --build-arg SAPCC_VERSION=2.16.1 \
+     -t sapcc:2.16.1 .
    ```
 
    **Hint:** Don't forget the dot at the end of the line!
-   
-   > If you're trying to build the image on a MacBook with an M1/M2 (ARM architecture) chip, you'll need to specify the platform in the docker build command to build the image for the x86 architecture. Note that when running the image, macOS will automagically run the container using Rosetta. For more information: [https://docs.docker.com/desktop/mac/apple-silicon/](https://docs.docker.com/desktop/mac/apple-silicon/).
-
-    > ```bash
-    > docker build -t sapcc:2.14.2 --platform linux/amd64 .
-    > ```
 
    If you're behind a proxy, add one or both of the following extra build arguments with appropriate values: `http_proxy` and `https_proxy`. If adding these arguments to the `docker build` invocation on separate lines, don't forget to escape the newlines at the end with `\`, e.g.:
 
    ```sh
    docker build \
-     --build-arg SAPJVM_VERSION=8.1.090 \
-     --build-arg SAPCC_VERSION=2.15.0 \
+     --build-arg SAPJVM_VERSION=8.1.096 \
+     --build-arg SAPCC_VERSION=2.16.1 \
      --build-arg http_proxy=http://proxy.mycompany.corp:1234 \
      --build-arg https_proxy=http://proxy.mycompany.corp:1234 \
-     -t sapcc:2.15.0 .
+     -t sapcc:2.16.1 .
    ```
 
    **Hint:** In a proxy environment your `docker build` command (see above) will fail in case you don't set the proxy as mentioned above or in case you use wrong proxy settings. Also consider that you might have to set the proxy manually for some software installed in the container, i.e. for the SAPCC you can set it manually for each SAPCP connection.
@@ -109,7 +106,7 @@ The Dockerfile is based on [https://github.com/PaxSchweiz/SAPHCPConnector/blob/m
         ```sh
         #docker run -p 8443:8443 -h mysapcc --name sapcc -d sapcc:<sapcc-version>
         #example:
-        docker run -p 8443:8443 -h mysapcc --name sapcc -d sapcc:2.15.0
+        docker run -p 8443:8443 -h mysapcc --name sapcc -d sapcc:2.16.1
         ```
 
     - Use this one if "random" ports on localhost are fine for you
@@ -117,7 +114,7 @@ The Dockerfile is based on [https://github.com/PaxSchweiz/SAPHCPConnector/blob/m
         ```sh
         #docker run -P -h mysapcc --name sapcc -d sapcc:<sapcc-version>
         #example:
-        docker run -P -h mysapcc --name sapcc -d sapcc:2.15.0
+        docker run -P -h mysapcc --name sapcc -d sapcc:2.16.1
         ```
 
 1. Starting/Stopping the container
