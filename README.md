@@ -190,7 +190,46 @@ docker network disconnect saptrial sapcc
 docker network rm saptrial
 ```
 
-### Creating a Docker Image from Docker Containers (i.e. for "backup")
+### Backup and restore
+
+Cloud connector has a backup and restore functionality, but that **doesn't work with volumes**, as restore tries to delete volume folders, and fails.
+Volumes are important because without them recreating the container destroys its configuration, and most container software (docker compose, kubernetes,...) expects to be able to recreate containers on a whim.
+
+#### Save the current configuration in a file
+
+This only covers volume contents, but in my experience does work.
+Not compatible with the backups done in the UI.
+
+```sh
+# stop the container to ensure a consistent backup
+docker stop sapcc
+
+# create an unencrypted archive with the cloud connector configuration
+the archive will be in the current folder, named sapcc_backup.tar.gz
+docker run -it --rm -v $PWD:/local --volumes-from sapcc alpine tar czf /local/sapcc_backup.tar.gz /opt/sap/scc/
+
+#start the container
+docker start sapcc
+```
+
+#### Restore the configuration from a previous backup
+
+This will restore a backup made with the command above.Not compatible with the backups done in the UI.
+
+```sh
+# stop the container to ensure a consistent backup
+docker stop sapcc
+
+# create an archive with the cloud connector configuration
+docker run -it --rm -v $PWD:/local --volumes-from sapcc alpine tar xzf /local/sapcc_backup.tar.gz
+
+#start the container
+docker start sapcc
+```
+
+#### Creating a Docker Image from Docker Containers
+
+This creates a new image with the files changed in the container. Configuration and logs are stored in volumes and won't be saved in the new image
 
 ```sh
 # Suggestion: stop the container you want to backup before continuing
