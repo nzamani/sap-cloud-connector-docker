@@ -91,6 +91,7 @@ The Dockerfile is based on [https://github.com/PaxSchweiz/SAPHCPConnector/blob/m
    **HINT:** Ignore the following errors: "Failed to get D-Bus connection: Operation not permitted"
 
 1. Create a container running as a deamon
+   **HINT:** this step and the following can also be done with a compose file - for details see [README-compose](./compose/README.md)
 
     - **Optional:** Delete or rename the old container to allow using the previous container name for the new container
 

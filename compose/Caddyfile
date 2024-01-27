@@ -1,0 +1,10 @@
+# enter your actual url and uncomment below. You might have many entries, and the transport bit is only required if sapcc is using a self signed certificate
+
+# https://<enter your server url here> {
+#     # sapcc must match the service name in docker-compose.yml
+#     reverse_proxy https://sapcc:8443 {
+#         transport http {
+#             tls_insecure_skip_verify
+#         }
+#     }
+# }
