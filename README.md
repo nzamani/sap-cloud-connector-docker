@@ -35,7 +35,7 @@ The Dockerfile is based on [https://github.com/PaxSchweiz/SAPHCPConnector/blob/m
 
    - Write down the current version of **Cloud Connector** (e.g. 2.17.1).
 
-   - Write down the current version of **SAP JVM** (e.g. 8.1.099)
+   - Write down the current version of **SAP JVM** (e.g. 8.1.101)
 
 1. Update Dockerfile
 
@@ -43,7 +43,7 @@ The Dockerfile is based on [https://github.com/PaxSchweiz/SAPHCPConnector/blob/m
 
    ```Dockerfile
    ARG SAPCC_VERSION=2.17.1
-   ARG SAPJVM_VERSION=8.1.099
+   ARG SAPJVM_VERSION=8.1.101
    ```
 
 1. Instructions for the following commands
@@ -68,7 +68,7 @@ The Dockerfile is based on [https://github.com/PaxSchweiz/SAPHCPConnector/blob/m
    
    # or pass your own version(s)
    docker build \
-     --build-arg SAPJVM_VERSION=8.1.099 \
+     --build-arg SAPJVM_VERSION=8.1.101 \
      --build-arg SAPCC_VERSION=2.17.1 \
      -t sapcc:2.17.1 .
    ```
@@ -79,7 +79,7 @@ The Dockerfile is based on [https://github.com/PaxSchweiz/SAPHCPConnector/blob/m
 
    ```sh
    docker build \
-     --build-arg SAPJVM_VERSION=8.1.099 \
+     --build-arg SAPJVM_VERSION=8.1.101 \
      --build-arg SAPCC_VERSION=2.17.1 \
      --build-arg http_proxy=http://proxy.mycompany.corp:1234 \
      --build-arg https_proxy=http://proxy.mycompany.corp:1234 \
@@ -150,11 +150,11 @@ Your browser will not trust the certificate of your SAPCC, and that's expected b
     The good old "access anyway" button is not displayed anymore. And here is the trick for Chrome on your macOS (should work on Windows as well):
   - Focus the Chrome page/tab which shows the warning by clicking somewhere on the corresponding page
   - Just type **thisisunsafe** (don't think about it, you'll see)
-  - voila, here you go... :-)
+  - voila, here you go... :blush:
 
   For details see
-  - https://twitter.com/zairwolf/status/1196878125734486021
-  - https://stackoverflow.com/questions/58802767/no-proceed-anyway-option-on-neterr-cert-invalid-in-chrome-on-macos
+  - <https://twitter.com/zairwolf/status/1196878125734486021>
+  - <https://stackoverflow.com/questions/58802767/no-proceed-anyway-option-on-neterr-cert-invalid-in-chrome-on-macos>
 
 ## Docker Configuration and Commands
 
@@ -218,7 +218,7 @@ can be used:
 | Type           | HTTP                                      |
 | Description    | NW ABAP 7.51 in Docker on localhost Basic |
 | Location ID    |                                           |
-| URL            | https://nwabap751:44300/sap/opu/odata     |
+| URL            | <https://nwabap751:44300/sap/opu/odata>     |
 | Proxy Type     | OnPremise                                 |
 | Authentication | BasicAuthentication                       |
 | User           | DEVELOPER                                 |
@@ -232,7 +232,7 @@ can be used:
 | Type           | HTTP                                    |
 | Description    | NW ABAP 7.51 in Docker on localhost PP  |
 | Location ID    |                                         |
-| URL            | https://nwabap751:44300/sap/opu/odata   |
+| URL            | <https://nwabap751:44300/sap/opu/odata>   |
 | Proxy Type     | OnPremise                               |
 | Authentication | PrincipalPropagation                    |
 
