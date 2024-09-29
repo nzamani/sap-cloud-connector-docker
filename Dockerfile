@@ -9,9 +9,9 @@ ARG SAPJVM_VERSION=8.1.101
 ################################################################
 # Upgrade + install dependencies
 ################################################################
-#RUN yum -y upgrade
-#RUN yum -y update; yum clean all
-RUN yum -y install which unzip wget net-tools less; yum clean all
+#RUN dnf -y upgrade
+#RUN dnf -y update; dnf clean all
+RUN dnf -y install which unzip wget net-tools less sysstat procps-ng; dnf clean all
 
 ################################################################
 # Install dependencies and the SAP packages
@@ -67,4 +67,4 @@ VOLUME /opt/sap/scc/scc_config
 VOLUME /opt/sap/scc/log
 
 # finally run sapcc as PID 1
-CMD ./go.sh
+ENTRYPOINT [ "./go.sh" ]
