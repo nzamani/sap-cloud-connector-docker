@@ -33,9 +33,9 @@ The Dockerfile is based on [https://github.com/PaxSchweiz/SAPHCPConnector/blob/m
 
    - Goto [tools.hanaondemand.com](https://tools.hana.ondemand.com/#cloud)
 
-   - Write down the current version of **Cloud Connector** (e.g. 2.17.1).
+   - Write down the current version of **Cloud Connector** (e.g. 2.17.2).
 
-   - Write down the current version of **SAP JVM** (e.g. 8.1.101)
+   - Write down the current version of **SAP JVM** (e.g. 8.1.102)
 
 1. Update Dockerfile
 
