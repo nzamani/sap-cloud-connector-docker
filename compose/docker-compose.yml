@@ -1,0 +1,52 @@
+version: "3.7"
+
+x-service-defaults: &service_defaults
+  networks:
+    - sapcc
+  restart: unless-stopped
+  logging:
+    driver: json-file
+    options:
+      max-size: "200k"
+      max-file: "10"
+
+services:
+  sapcc:
+    <<: *service_defaults
+    # 2.16.1 is teh image tag, matches the -t parameter in your docker build
+    image: sapcc:2.16.1
+    container_name: sapcc
+    hostname: mysapcc
+    volumes:
+      - sapcc_config:/opt/sap/scc/config
+      - sapcc_sccconf:/opt/sap/scc/scc_config
+      - sapcc_logs:/opt/sap/scc/log
+    ports:
+      - 8443:8443
+  # uncomment below and the relevant volumes to enable caddy
+  # this requires your public 80 and 443 ports to be forwarded to this machine
+
+  # caddy:
+  #   <<: *service_defaults
+  #   image: caddy
+  #   container_name: caddy
+  #   ports:
+  #     - "80:80"
+  #     - "443:443"
+  #   volumes:
+  #     - ./Caddyfile:/etc/caddy/Caddyfile
+  #     - caddy_data:/data
+  #     - caddy_config:/config
+  #   environment:
+  #     - ADMIN_USER=${ADMIN_USER:-admin}
+  #     - ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin}
+
+networks:
+  sapcc: {}
+
+volumes:
+  sapcc_config: {}
+  sapcc_sccconf: {}
+  sapcc_logs: {}
+  # caddy_data: {}
+  # caddy_config: {}
