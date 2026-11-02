@@ -3,8 +3,8 @@ FROM rockylinux:9
 ################################################################
 # DEFINE sapcc and jvm version
 ################################################################
-ARG SAPCC_VERSION=2.17.2
-ARG SAPJVM_VERSION=8.1.102
+ARG SAPCC_VERSION=2.19.2
+ARG SAPJVM_VERSION=8.1.112
 
 ################################################################
 # Upgrade + install dependencies
@@ -31,7 +31,7 @@ WORKDIR /tmp/sapdownloads
 # ATTENTION:
 # This automated download automatically accepts SAP's End User License Agreement (EULA).
 # Thus, when using this docker file as is you automatically accept SAP's EULA!
-RUN wget --no-check-certificate --no-cookies --header "Cookie: eula_3_2_agreed=tools.hana.ondemand.com/developer-license-3_2.txt; path=/;" -S https://tools.hana.ondemand.com/additional/sapcc-$SAPCC_VERSION-linux-x64.zip && \
+RUN wget --no-check-certificate --no-cookies --header "Cookie: eula_cloud_connector_license_v1_2026_agreed=tools.hana.ondemand.com/cloud-connector-agreement_v1.2026.txt; path=/;" -S https://tools.hana.ondemand.com/additional/sapcc-$SAPCC_VERSION-linux-x64.zip && \
     wget --no-check-certificate --no-cookies --header "Cookie: eula_3_2_agreed=tools.hana.ondemand.com/developer-license-3_2.txt; path=/;" -S https://tools.hana.ondemand.com/additional/sapjvm-$SAPJVM_VERSION-linux-x64.rpm && \
     unzip sapcc-$SAPCC_VERSION-linux-x64.zip && \
     rpm -i sapjvm-$SAPJVM_VERSION-linux-x64.rpm && \
